@@ -1,48 +1,47 @@
+"use client";
+
 import logo from "@/assets/logo.png";
+import { useState } from "react";
 
 export default function Navbar() {
-  return (
-    <div className="w-full h-[auto]">
-      <nav className="fixed w-full h-[90px] bg-[#101820] flex py-[5px] px-[10px] justify-between z-[1]">
-        <a href="">
-          <img
-            src={logo.src}
-            alt=""
-            width={100}
-            className="max-w-[110px] h-[auto] ml-[40px] mt-[25px]"
-          />
-        </a>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-        <span className="flex flex-row items-center gap-[50px] text-[17px] font-[600] mr-[40px]">
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Beranda
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Gabung Jadi Mitra
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Go Corp
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Karir
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Perusahaan
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Produk
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Blog
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            Bantuan
-          </a>
-          <a href="#" className="text-white cursor-pointer hover:underline">
-            ID
-          </a>
-        </span>
-      </nav>
-    </div>
+  return (
+    <nav className="fixed w-full bg-[#101820] text-white z-10 shadow-md">
+      <div className="container mx-auto px-5 py-4 flex items-center justify-between">
+        <a href="#">
+          <img src={logo.src} alt="Logo" className="w-24 h-10 sm:h-12" />
+        </a>
+        <button
+          className="lg:hidden text-xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          ☰
+        </button>
+        <ul
+          className={`absolute lg:static bg-[#101820] lg:bg-transparent top-[70px] left-0 w-full lg:w-auto lg:flex lg:items-center lg:gap-8 px-5 py-4 lg:py-0 transition-all ${
+            isMenuOpen ? "block" : "hidden"
+          }`}
+        >
+          {[
+            "Beranda",
+            "Gabung Jadi Mitra",
+            "Go Corp",
+            "Karir",
+            "Perusahaan",
+            "Produk",
+            "Blog",
+            "Bantuan",
+            "ID",
+          ].map((item, index) => (
+            <li key={index} className="py-2 lg:py-0">
+              <a href="#" className="hover:underline">
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 }
